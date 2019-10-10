@@ -24,19 +24,19 @@ function deployKeyCounter {
 }
 
 # OpenShift
-#function exposeSvc {
+#function exposeApp {
 #   kubectl expose svc key-counter
 #}
 
-function exposeSvc {
-  SVC=$1
-  echo Creating NodePort for $SVC
-  kubectl create svc $SVC --type=NodePort
+function exposeApp {
+  DEPLOY=$1
+  echo Creating NodePort for $DEPLOY
+  kubectl expose deployment $APP --type=NodePort --name=$APP
 }
 
 function exposeKeyCounter {
   kubectl expose $DEPLOY key-counter --port=8080
-  exposeSvc key-counter
+  exposeApp key-counter
 }
 
 function deployDispatcher {

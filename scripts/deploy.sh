@@ -29,15 +29,16 @@ function deployKeyCounter {
 #}
 
 function exposeApp {
-  DEPLOY=$1
+  TYPE=$1
+  DEPLOY=$2
   echo Creating NodePort for $DEPLOY
-  kubectl expose deployment $DEPLOY --type=NodePort --name=$DEPLOY-np \
+  kubectl expose $TYPE $DEPLOY --type=NodePort --name=$DEPLOY-np \
     --port=8080
 }
 
 function exposeKeyCounter {
   kubectl expose $DEPLOY key-counter --port=8080
-  exposeApp key-counter
+  exposeApp deploy key-counter
 }
 
 function deployDispatcher {
@@ -47,7 +48,7 @@ function deployDispatcher {
 
 function exposeDispatcher {
   kubectl create -f ../config/dispatcher-svc.yaml
-  exposeApp dispatcher
+  exposeApp sts dispatcher
 }
 function deployTestPump {
   echo Deploying test pump
@@ -56,7 +57,7 @@ function deployTestPump {
 
 function exposeTestPump {
   kubectl expose $DEPLOY test-pump --port=8080
-  exposeApp test-pump
+  exposeApp deploy test-pump
 }
 
 createProject

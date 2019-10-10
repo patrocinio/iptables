@@ -55,7 +55,7 @@ function deployTestPump {
 }
 
 function exposeTestPump {
-  kubectl expose $DEPLOY test-pump --port=8080
+  kubectl expose deploy test-pump --port=8080
   exposeSvc test-pump
 }
 

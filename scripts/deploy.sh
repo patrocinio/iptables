@@ -1,3 +1,9 @@
+# Openshift
+#DEPLOY=dc
+
+# Kubernetes
+DEPLOY=deployment
+
 function createProject {
   echo Creating project...
   kubectl new-project iptables
@@ -9,7 +15,7 @@ function deployRedis {
 }
 
 function exposeRedis {
-  kubectl expose dc redis --port=6379
+  kubectl expose $DEPLOY redis --port=6379
 }
 
 function deployKeyCounter {
@@ -18,7 +24,7 @@ function deployKeyCounter {
 }
 
 function exposeKeyCounter {
-  kubectl expose dc key-counter --port=8080
+  kubectl expose $DEPLOY key-counter --port=8080
   kubectl expose svc key-counter
 }
 
@@ -37,7 +43,7 @@ function deployTestPump {
 }
 
 function exposeTestPump {
-  kubectl expose dc test-pump --port=8080
+  kubectl expose $DEPLOY test-pump --port=8080
   kubectl expose svc test-pump
 }
 

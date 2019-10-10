@@ -5,6 +5,7 @@ metadata:
     app: dispatcher
   name: dispatcher
 spec:
+  serviceName: ""
   podManagementPolicy: OrderedReady
   replicas: 10
   selector:

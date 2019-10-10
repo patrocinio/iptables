@@ -1,47 +1,45 @@
 function createProject {
   echo Creating project...
-  oc new-project iptables
+  kubectl new-project iptables
 }
 
 function deployRedis {
   echo Deploying redis
-  oc run redis --image=redis
+  kubectl run redis --image=redis
 }
 
 function exposeRedis {
-  oc expose dc redis --port=6379
+  kubectl expose dc redis --port=6379
 }
 
 function deployKeyCounter {
   echo Deploying key counter
-  oc run key-counter --image=patrocinio/iptables-key-counter
+  kubectl run key-counter --image=patrocinio/iptables-key-counter
 }
 
 function exposeKeyCounter {
-  oc expose dc key-counter --port=8080
-  oc expose svc key-counter
+  kubectl expose dc key-counter --port=8080
+  kubectl expose svc key-counter
 }
 
 function deployDispatcher {
   echo Deploying counter
-  oc create -f ../config/dispatcher.yaml
+  kukectl create -f ../config/dispatcher.yaml
 }
 
 function exposeDispatcher {
-  oc create -f ../config/dispatcher-svc.yaml
-  oc expose svc dispatcher
+  kubectl create -f ../config/dispatcher-svc.yaml
+  kubectl expose svc dispatcher
 }
 function deployTestPump {
   echo Deploying test pump
-  oc run test-pump --image=patrocinio/iptables-test-pump
+  kubectl run test-pump --image=patrocinio/iptables-test-pump
 }
 
 function exposeTestPump {
-  oc expose dc test-pump --port=8080
-  oc expose svc test-pump
+  kubectl expose dc test-pump --port=8080
+  kubectl expose svc test-pump
 }
-
-
 
 createProject
 deployRedis

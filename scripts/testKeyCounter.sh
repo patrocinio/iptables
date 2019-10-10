@@ -41,7 +41,7 @@ function increment {
 # PATH=$(getPath)
 # echo Path: $PATH
 
-TARGET=$(getPort key-counter)
+TARGET=$(getPort key-counter-np)
 
 #reset
 #define

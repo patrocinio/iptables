@@ -1,4 +1,5 @@
-CURL=/usr/local/opt/curl/bin/curl
+#CURL=/usr/local/opt/curl/bin/curl
+CURL=curl
 KEY=my-key
 NODE=kube.patrocinio.org
 

@@ -1,16 +1,31 @@
-CURL=/usr/local/opt/curl/bin/curl
-KEY=my-key
+#CURL=/usr/local/opt/curl/bin/curl
+CURL=curl
+NODE=kube.patrocinio.org
 
 function getPath {
   oc get route key-counter --no-headers=true | awk '{print $2}'
 }
 
-function list {
-  echo Listing
-  $CURL $PATH/list
+function getPort {
+  	port=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services $1)
+	echo $port
 }
 
-PATH=$(getPath)
-echo Path: $PATH
+function sendRequest {
+  $CURL $NODE:$TARGET/$1
+}
+
+
+function list {
+  echo Listing
+  sendRequest list
+}
+
+# OpenShift
+#PATH=$(getPath)
+#echo Path: $PATH
+
+TARGET=$(getPort key-counter-np)
+
 
 list

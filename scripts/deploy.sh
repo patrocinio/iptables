@@ -31,7 +31,7 @@ function deployKeyCounter {
 function exposeApp {
   DEPLOY=$1
   echo Creating NodePort for $DEPLOY
-  kubectl expose deployment $APP --type=NodePort --name=$APP
+  kubectl expose deployment $APP --type=NodePort --name=$DEPLOY
 }
 
 function exposeKeyCounter {

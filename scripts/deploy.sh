@@ -23,6 +23,12 @@ function deployKeyCounter {
   kubectl run key-counter --image=patrocinio/iptables-key-counter
 }
 
+function exposeSvc {
+  SVC=$1
+  echo Creating NodePort for $SVC
+  kubectl create svc $SVC --type=NodePort
+}
+
 function exposeKeyCounter {
   kubectl expose $DEPLOY key-counter --port=8080
   kubectl expose svc key-counter

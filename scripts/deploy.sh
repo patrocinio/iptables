@@ -43,12 +43,12 @@ function exposeTestPump {
 
 
 
-#createProject
-#deployRedis
-#exposeRedis
-#deployKeyCounter
-#exposeKeyCounter
-#deployDispatcher
-#exposeDispatcher
-#deployTestPump
-#exposeTestPump
+createProject
+deployRedis
+exposeRedis
+deployKeyCounter
+exposeKeyCounter
+deployDispatcher
+exposeDispatcher
+deployTestPump
+exposeTestPump

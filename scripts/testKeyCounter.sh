@@ -43,8 +43,8 @@ function increment {
 
 TARGET=$(getPort key-counter-np)
 
-#reset
-#define
-#list
-#increment
+reset
+define
+list
+increment
 list

@@ -1,32 +1,46 @@
 CURL=/usr/local/opt/curl/bin/curl
 KEY=my-key
+NODE=kube.patrocinio.org
 
 function getPath {
-  oc get route key-counter --no-headers=true | awk '{print $2}'
+  kubectl get route key-counter --no-headers=true | awk '{print $2}'
 }
+
+function getPort {
+  	port=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services $1)
+	echo $port
+}
+
+function sendRequest {
+  $CURL $NODE:$TARGET/$1
+}
+
 
 function reset {
   echo Resetting Keys
-  $CURL $PATH/reset
+  sendRequest reset
 }
 
 function list {
   echo Listing
-  $CURL $PATH/list
+  sendRequest list
 }
 
 function define {
   echo Defining one key
-  $CURL $PATH/define/$KEY
+  sendRequest define/$KEY
 }
 
 function increment {
   echo Incremeting key
-  $CURL $PATH/inc/$KEY
+  sendRequest inc/$KEY
 }
 
-PATH=$(getPath)
-echo Path: $PATH
+# OpenShift
+# PATH=$(getPath)
+# echo Path: $PATH
+
+TARGET=$(getPort key-counter)
 
 #reset
 #define

@@ -21,6 +21,9 @@ function pump {
   sendRequest pump
 }
 
+TARGET=$(getPort dispatcher-np)
+
+
 # OpenShift
 #PATH=$(getPath)
 #echo Path: $PATH

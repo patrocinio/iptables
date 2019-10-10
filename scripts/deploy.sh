@@ -47,7 +47,7 @@ function deployDispatcher {
 
 function exposeDispatcher {
   kubectl create -f ../config/dispatcher-svc.yaml
-  kubectl expose svc dispatcher
+  exposeApp dispatcher
 }
 function deployTestPump {
   echo Deploying test pump
@@ -56,7 +56,7 @@ function deployTestPump {
 
 function exposeTestPump {
   kubectl expose $DEPLOY test-pump --port=8080
-  kubectl expose svc test-pump
+  exposeApp test-pump
 }
 
 createProject

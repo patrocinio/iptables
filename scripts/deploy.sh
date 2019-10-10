@@ -30,7 +30,7 @@ function exposeKeyCounter {
 
 function deployDispatcher {
   echo Deploying counter
-  kukectl create -f ../config/dispatcher.yaml
+  kubectl create -f ../config/dispatcher.yaml
 }
 
 function exposeDispatcher {

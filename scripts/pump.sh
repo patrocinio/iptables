@@ -1,5 +1,6 @@
 #CURL=/usr/local/opt/curl/bin/curl
 CURL=curl
+NODE=kube.patrocinio.org
 
 function getPath {
   oc get route dispatcher --no-headers=true | awk '{print $2}'

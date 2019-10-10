@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: dispatcher
+  name: dispatcher
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 10
+  selector:
+    matchLabels:
+      app: dispatcher
+  template:
+    metadata:
+      labels:
+        app: dispatcher
+    spec:
+      containers:
+      - image: patrocinio/iptables-dispatcher
+        imagePullPolicy: Always
+        name: dispatcher
+        ports:
+        - containerPort: 8080
+          name: dispatcher
+          protocol: TCP
+      restartPolicy: Always
+  updateStrategy:
+    type: RollingUpdate

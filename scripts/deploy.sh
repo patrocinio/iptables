@@ -6,7 +6,7 @@ DEPLOY=deployment
 
 function createProject {
   echo Creating project...
-  kubectl new-project iptables
+  kubectl create ns iptables
 }
 
 function deployRedis {
